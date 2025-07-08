@@ -4,17 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GreenLeaf Product</title>
+    <title>Proetawa Indonesia</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/heroicons@2.0.16/dist/heroicons.min.js"></script>
+    <!-- SwiperJS CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
         }
 
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+            color: white;
+            padding-bottom: 4px;
+            transition: color 0.3s ease-in-out;
+        }
 
-        /* Navbar */
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            height: 2px;
+            width: 0;
+            background-color: white;
+            transition: width 0.4s ease-in-out;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
         .nav-link {
             position: relative;
             font-weight: 500;
@@ -42,7 +69,6 @@
             transition: width 0.3s ease-out;
         }
 
-        /* MODAL */
         @keyframes fadeIn {
             0% {
                 opacity: 0;
@@ -60,16 +86,16 @@
         }
     </style>
 
+
 </head>
 
 <body class="bg-white text-gray-800">
 
     <!-- Navbar -->
-    <header class="absolute top-0 left-0 w-full z-50 bg-transparent mt-6">
+    <header id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
         <div class="max-w-6xl mx-auto px-6 py-6 flex justify-center items-center">
-            <!-- Navigasi -->
             <nav
-                class="flex flex-wrap justify-center gap-x-6 sm:gap-x-10 md:gap-x-16 lg:gap-x-20 xl:gap-x-24 gap-y-4 text-center text-sm sm:text-base md:text-lg">
+                class="flex flex-wrap justify-center gap-x-6 sm:gap-x-10 md:gap-x-16 lg:gap-x-24 xl:gap-x-32 text-white text-sm sm:text-base">
                 <a href="#home" class="nav-link">About us</a>
                 <a href="#benefit" class="nav-link">Manfaat</a>
                 <a href="#certificates" class="nav-link">Sertifikat</a>
@@ -165,7 +191,7 @@
     </div>
 
     <!-- Tentang Produk -->
-    <section class="py-32 mt-20 px-6 bg-white">
+    <section id="home" class="py-32 mt-20 px-6 bg-white">
         <div class="max-w-6xl mx-auto text-center mb-12">
             <h2 class="text-3xl md:text-4xl font-bold mb-4 text-green-800">Tentang Produk Kami</h2>
             <p class="text-gray-600 text-base md:text-lg max-w-3xl mx-auto">
@@ -205,7 +231,7 @@
     </section>
 
     <!-- Manfaat -->
-    <section class="bg-green-50 py-32 mt-30 px-6">
+    <section id="benefit" class="bg-green-50 py-32 mt-30 px-6">
         <div class="max-w-6xl mx-auto">
             <h2 class="text-3xl font-bold text-center mb-10">Manfaat Produk</h2>
 
@@ -251,7 +277,7 @@
     </section>
 
     <!-- Sertifikat -->
-    <section class="py-32 mt-20 px-6">
+    <section id="certificates" class="py-32 mt-20 px-6">
         <div class="max-w-6xl mx-auto">
             <h2 class="text-3xl font-bold text-center mb-10">Sertifikat Kami</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -274,22 +300,36 @@
     </section>
 
     <!-- Testimoni -->
-    <section class="bg-green-50 py-32 mt-20 px-6">
+    <section id="testimoni" class="bg-green-50 py-32 mt-20 px-6">
         <div class="max-w-6xl mx-auto">
             <h2 class="text-3xl font-bold text-center mb-10">Apa Kata Mereka?</h2>
-            <div class="grid md:grid-cols-3 gap-6">
-                @foreach ($testimonies as $test)
-                    <div class="bg-white rounded shadow p-6 text-center">
-                        <img src="https://i.pinimg.com/736x/03/ee/2f/03ee2f37bad6cf25a9d6cd983021a596.jpg"
-                            alt="Testimoni" class="w-20 h-20 rounded-full mx-auto mb-4">
-                        <h4 class="font-semibold">{{ $test->nama }} - {{ $test->asal }}</h4>
-                        <p class="text-sm text-gray-500 mb-2">{{ $test->umur }} Tahun</p>
-                        <p class="text-gray-600 italic">"{{ $test->testimoni }}."</p>
-                    </div>
-                @endforeach
+
+            <!-- Swiper container -->
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    @foreach ($testimonies as $test)
+                        <div class="swiper-slide pb-12">
+                            <div class="bg-white rounded shadow p-6 text-center h-full">
+                                <img src="https://i.pinimg.com/736x/03/ee/2f/03ee2f37bad6cf25a9d6cd983021a596.jpg"
+                                    alt="Testimoni" class="w-20 h-20 rounded-full mx-auto mb-4">
+                                <h4 class="font-semibold">{{ $test->nama }} - {{ $test->asal }}</h4>
+                                <p class="text-sm text-gray-500 mb-2">{{ $test->umur }} Tahun</p>
+                                <p class="text-gray-600 italic">"{{ $test->testimoni }}."</p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+                <div class="swiper-pagination mt-8"></div>
             </div>
+
+
+            <!-- Bulatan Indicator -->
+            <div class="swiper-pagination mt-8"></div>
+        </div>
         </div>
     </section>
+
 
     <!-- Footer -->
     <footer class="bg-green-700 py-32 mt-20 text-white">
@@ -329,6 +369,55 @@
             modal.classList.toggle('hidden');
         }
     </script>
+
+
+    <script>
+        const navbar = document.getElementById("navbar");
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add("backdrop-blur-md", "bg-green-900/30", "shadow-md", "py-4");
+            } else {
+                navbar.classList.remove("backdrop-blur-md", "bg-green-900/30", "shadow-md", "py-4");
+            }
+        });
+    </script>
+
+    <!-- SwiperJS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+    <script>
+        const swiper = new Swiper('.mySwiper', {
+            loop: true,
+            autoplay: {
+                delay: 2000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            spaceBetween: 30,
+            breakpoints: {
+                320: {
+                    slidesPerView: 1,
+                },
+                640: {
+                    slidesPerView: 1,
+                },
+                768: {
+                    slidesPerView: 2,
+                },
+                1024: {
+                    slidesPerView: 3,
+                }
+            }
+        });
+    </script>
+
+
+
 </body>
 
 </html>
