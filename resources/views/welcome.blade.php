@@ -296,8 +296,8 @@
                     @foreach ($testimonies as $test)
                         <div class="swiper-slide pb-12 fade-gsap">
                             <div class="bg-white rounded shadow p-6 text-center h-full">
-                                <img src="https://i.pinimg.com/736x/03/ee/2f/03ee2f37bad6cf25a9d6cd983021a596.jpg"
-                                    alt="Testimoni" class="w-20 h-20 rounded-full mx-auto mb-4">
+                                <img src="{{ asset('uploads/testimonies/' . $test->foto) }}" alt="Testimoni"
+                                    class="w-20 h-20 rounded-full mx-auto mb-4">
                                 <h4 class="font-semibold">{{ $test->nama }} - {{ $test->asal }}</h4>
                                 <p class="text-sm text-gray-500 mb-2">{{ $test->umur }} Tahun</p>
                                 <p class="text-gray-600 italic">"{{ $test->testimoni }}."</p>
@@ -333,18 +333,26 @@
             <div class="flex justify-center gap-8 flex-wrap mb-8">
                 @foreach ($chunk as $r)
                     <div
-                        class="bg-green-50 p-8 rounded-xl shadow hover:shadow-lg transition duration-300 w-full sm:w-[300px]">
-                        <h3 class="text-xl font-semibold text-green-800 mb-4">{{ $r->role }}</h3>
-                        <p class="text-gray-700 mb-4">{{ $r->penjelasan }}</p>
-                        <ul class="text-sm text-gray-700 space-y-2 mb-6 text-left">
+                        class="bg-gradient-to-br from-green-50 to-green-100 border border-green-200/60 p-6 rounded-2xl shadow-md hover:shadow-xl hover:ring-2 hover:ring-green-300 transition-all duration-300 w-full sm:w-[320px]">
+
+                        <h3 class="text-2xl font-bold text-green-800 mb-3 tracking-wide">{{ $r->role }}</h3>
+
+                        <p class="text-gray-600 mb-4 leading-relaxed text-sm">{{ $r->penjelasan }}</p>
+
+                        <p class="text-xs text-gray-500 italic mb-2">Syarat menjadi
+                            <strong>{{ $r->role }}</strong>:</p>
+
+                        <ul class="text-sm text-gray-700 space-y-2 mb-5 list-none pl-0">
                             @foreach (explode("\n", $r->syarat) as $item)
-                                <li class="flex items-start"><span class="text-green-600 mr-2">✅</span>
-                                    {{ trim($item) }}</li>
+                                <li class="flex items-start">
+                                    <span class="text-green-600 mr-2 mt-0.5">✅</span>
+                                    <span>{{ trim($item) }}</span>
+                                </li>
                             @endforeach
                         </ul>
 
                         <a href="{{ $r->link }}" target="_blank"
-                            class="block bg-green-600 text-white text-center py-2 rounded-full hover:bg-green-700 transition">
+                            class="block bg-green-600 hover:bg-green-700 text-white font-semibold text-sm py-2.5 rounded-full text-center transition duration-300">
                             Join Us
                         </a>
                     </div>
