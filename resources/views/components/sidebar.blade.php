@@ -24,7 +24,10 @@
                         <a class="nav-link" href="{{ route('shop.index') }}">Shop
                         </a>
                     </li>
-                   
+                    <li class="{{ Request::is('dashboard-ecommerce-dashboard') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('role.index') }}">Role
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>

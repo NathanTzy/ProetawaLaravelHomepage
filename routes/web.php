@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\frontend\FrontEndController;
+use App\Http\Controllers\roleController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\TestimonyController;
 
@@ -18,4 +19,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('testymoni', TestimonyController::class);
     Route::resource('contact', ContactController::class);
     Route::resource('shop', ShopController::class);
+    Route::resource('role', roleController::class);
 });
